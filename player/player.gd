@@ -1,10 +1,12 @@
 extends CharacterBody3D
 
-
-@export var speed := 5.0
+@export var basic_speed := 5.0
+@export var sprinting_speed := 7.0
 @export var jump_velocity := 4.5
 
 @onready var cam := $Camera3D
+
+var speed := 5.0
 
 const SENSITIVITY := 0.003
 
@@ -19,6 +21,12 @@ func _physics_process(delta: float) -> void:
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_velocity
+	
+	# Sprint
+	if Input.is_action_pressed("sprint"):
+		speed = sprinting_speed
+	else:
+		speed = basic_speed
 
 	# Get the input direction and handle the movement/deceleration.
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
