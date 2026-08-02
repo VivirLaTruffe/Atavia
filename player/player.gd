@@ -4,6 +4,8 @@ extends CharacterBody3D
 @export var sprinting_speed := 7.0
 @export var jump_velocity := 4.5
 @export var reach := 3.0
+@export var block_to_place := 1
+@export var block_to_remove := 0
 
 @onready var cam: Camera3D = $Camera3D
 @onready var voxel_world_link : VoxelWorld = get_tree().get_first_node_in_group("voxel_world")
@@ -21,7 +23,7 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 
 	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if Input.is_action_pressed("jump") and is_on_floor():
 		velocity.y = jump_velocity
 	
 	# Sprint
@@ -46,7 +48,7 @@ func _physics_process(delta: float) -> void:
 		
 	# Place
 	if Input.is_action_just_pressed("place"):
-		var block_id := 1
+		var block_id := block_to_place
 		place_block(block_id)
 
 	move_and_slide()
@@ -62,7 +64,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func break_block() -> void:
 	var voxel_hit_link := raycast_value()
 	if voxel_hit_link != null:
-		voxel_world_link.set_block(voxel_hit_link.block_position, 0)
+		voxel_world_link.set_block(voxel_hit_link.block_position, block_to_remove)
 
 func place_block(block_id: int) -> void:
 	var voxel_hit_link := raycast_value()
