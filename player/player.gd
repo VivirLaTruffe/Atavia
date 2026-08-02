@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 @export var basic_speed := 5.0
 @export var sprinting_speed := 7.0
-@export var jump_velocity := 4.5
+@export var jump_velocity := 5.0
 @export var reach := 3.0
 @export var block_to_place := 1
 @export var block_to_remove := 0

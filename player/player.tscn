@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://bq1kwm085f7nk"]
 
 [ext_resource type="Script" uid="uid://cfipqwqom7emc" path="res://player/player.gd" id="1_oul6g"]
+[ext_resource type="PackedScene" uid="uid://b5j2etfs0jxe3" path="res://weapon/weapon.tscn" id="2_rkbax"]
+[ext_resource type="PackedScene" uid="uid://bg25mpio5ory6" path="res://ui/hud.tscn" id="3_g1dw6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
 radius = 0.4
@@ -22,6 +24,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 
 [node name="VoxelViewer" type="VoxelViewer" parent="Camera3D" unique_id=1494707558]
 
+[node name="Weapon" parent="Camera3D" unique_id=1398698611 instance=ExtResource("2_rkbax")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3771767, -0.38921523, -0.32766718)
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1623149419]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 mesh = SubResource("CapsuleMesh_4flbx")
+
+[node name="Hud" parent="." unique_id=349649369 instance=ExtResource("3_g1dw6")]

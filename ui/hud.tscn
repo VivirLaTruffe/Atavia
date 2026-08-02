@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bg25mpio5ory6"]
+
+[node name="Hud" type="Control" unique_id=349649369]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="." unique_id=2052528843]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0.9403621, 3.4172833e-06, 3.85046e-07, 1)
+theme_override_font_sizes/font_size = 24
+text = "+"

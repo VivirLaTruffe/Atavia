@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://b5j2etfs0jxe3"]
+
+[ext_resource type="Script" uid="uid://cwv0askiix3rx" path="res://weapon/weapon.gd" id="1_4ht74"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_4ht74"]
+size = Vector3(0.1, 0.1, 1)
+
+[node name="Weapon" type="Node3D" unique_id=1398698611]
+script = ExtResource("1_4ht74")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2115460644]
+mesh = SubResource("BoxMesh_4ht74")
