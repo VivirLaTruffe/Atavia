@@ -68,7 +68,8 @@ func break_block() -> void:
 
 func place_block(block_id: int) -> void:
 	var voxel_hit_link := raycast_value()
-	if voxel_hit_link != null:
+	var peut_placer := verif_can_place_block_under_player(voxel_hit_link)
+	if voxel_hit_link != null && peut_placer == true:
 		voxel_world_link.set_block(voxel_hit_link.previous_block_position, block_id)
 
 func raycast_value() -> VoxelHit:
@@ -76,3 +77,11 @@ func raycast_value() -> VoxelHit:
 	var camera_orientation := -cam.global_transform.basis.z
 	var voxel_hit_link := voxel_world_link.raycast(camera_position, camera_orientation, reach)
 	return voxel_hit_link
+	
+func verif_can_place_block_under_player(hit: VoxelHit) -> bool:
+	if hit != null:
+		var block_box := AABB(Vector3(hit.previous_block_position), Vector3.ONE)
+		var player_box := AABB(global_position - Vector3(0.4, 0, 0.4), Vector3(0.8, 1.8, 0.8))
+		if player_box.intersects(block_box):
+			return false
+	return true
