@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bnblpvw8cnclf"]
 
-[ext_resource type="PackedScene" uid="uid://bq1kwm085f7nk" path="res://player/player.tscn" id="1_6ahwf"]
+[ext_resource type="Script" uid="uid://dpsfc52rvo412" path="res://world/voxel_world.gd" id="1_3kknk"]
+[ext_resource type="PackedScene" uid="uid://bq1kwm085f7nk" path="res://player/player.tscn" id="2_o5ado"]
 
 [sub_resource type="VoxelGeneratorFlat" id="VoxelGeneratorFlat_f457i"]
 channel = 0
@@ -29,10 +30,11 @@ sky = SubResource("Sky_6ahwf")
 
 [node name="TestVoxel" type="Node3D" unique_id=12947897]
 
-[node name="VoxelTerrain" type="VoxelTerrain" parent="." unique_id=1544544960]
+[node name="VoxelTerrain" type="VoxelTerrain" parent="." unique_id=1544544960 groups=["voxel_world"]]
 generator = SubResource("VoxelGeneratorFlat_f457i")
 mesher = SubResource("VoxelMesherBlocky_shtc7")
 material_override = SubResource("StandardMaterial3D_f457i")
+script = ExtResource("1_3kknk")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1035793900]
 environment = SubResource("Environment_o387q")
@@ -40,5 +42,5 @@ environment = SubResource("Environment_o387q")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2025819730]
 transform = Transform3D(1, 0, 0, 0, -0.54507804, 0.8383853, 0, -0.8383853, -0.54507804, 0, 78.02576, 0)
 
-[node name="Player" parent="." unique_id=165257890 instance=ExtResource("1_6ahwf")]
+[node name="Player" parent="." unique_id=165257890 instance=ExtResource("2_o5ado")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

@@ -3,8 +3,9 @@ extends CharacterBody3D
 @export var basic_speed := 5.0
 @export var sprinting_speed := 7.0
 @export var jump_velocity := 4.5
+@export var reach := 3.0
 
-@onready var cam := $Camera3D
+@onready var cam: Camera3D = $Camera3D
 
 var speed := 5.0
 
@@ -37,6 +38,10 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
+		
+	# Break
+	if Input.is_action_just_pressed("break"):
+		Break()
 
 	move_and_slide()
 
@@ -46,3 +51,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		rotate_y(event.relative.x*-SENSITIVITY)
 		cam.rotate_x(event.relative.y*-SENSITIVITY)
 		cam.rotation.x = clamp(cam.rotation.x, deg_to_rad(-90), deg_to_rad(90))
+
+# Break a block
+func Break() -> void:
+	var voxel_world_link : VoxelWorld = get_tree().get_first_node_in_group("voxel_world")
+	var camera_position := cam.global_position
+	var camera_orientation := -cam.global_transform.basis.z
+	var voxel_hit_link := voxel_world_link.raycast(camera_position, camera_orientation, reach)
+	if voxel_hit_link != null:
+		voxel_world_link.set_block(voxel_hit_link.block_position, 0)
