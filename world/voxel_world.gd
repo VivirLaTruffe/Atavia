@@ -17,7 +17,7 @@ func raycast(caster_position: Vector3, caster_orientation: Vector3, caster_reach
 	
 	var voxel_hit := VoxelHit.new()
 	voxel_hit.block_position = block.position
-	voxel_hit.block_position_before = block.previous_position
+	voxel_hit.previous_block_position = block.previous_position
 	return voxel_hit 
 
 func set_block(block_position: Vector3i, block_id: int) -> void:

@@ -41,7 +41,12 @@ func _physics_process(delta: float) -> void:
 		
 	# Break
 	if Input.is_action_just_pressed("break"):
-		Break()
+		break_block()
+		
+	# Place
+	if Input.is_action_pressed("place"):
+		var block_id := 1
+		place_block(block_id)
 
 	move_and_slide()
 
@@ -53,10 +58,20 @@ func _unhandled_input(event: InputEvent) -> void:
 		cam.rotation.x = clamp(cam.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 
 # Break a block
-func Break() -> void:
+func break_block() -> void:
 	var voxel_world_link : VoxelWorld = get_tree().get_first_node_in_group("voxel_world")
 	var camera_position := cam.global_position
 	var camera_orientation := -cam.global_transform.basis.z
 	var voxel_hit_link := voxel_world_link.raycast(camera_position, camera_orientation, reach)
 	if voxel_hit_link != null:
 		voxel_world_link.set_block(voxel_hit_link.block_position, 0)
+
+func place_block(block_id: int) -> int:
+	var voxel_world_link : VoxelWorld = get_tree().get_first_node_in_group("voxel_world")
+	var camera_position := cam.global_position
+	var camera_orientation := -cam.global_transform.basis.z
+	var voxel_hit_link := voxel_world_link.raycast(camera_position, camera_orientation, reach)
+	if voxel_hit_link != null:
+		voxel_world_link.set_block(voxel_hit_link.previous_block_position, block_id)
+	
+	return 0
